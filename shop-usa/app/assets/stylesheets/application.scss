@@ -28,17 +28,15 @@ body .container {
   border: none;
 }
 
-// .navbar .logo {
-//   position: relative;
-//   left: 2rem;
-//   cursor: pointer;
-//   width: 100px;
-//   height: 75px;
-// }
+.navbar .logo {
+  position: relative;
+  left: 2rem;
+  cursor: pointer;
+  height: 50px;
+}
 
 .navbar-default .navbar-nav > li > a {
   color: white;
-  padding-top: 25px;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
@@ -51,7 +49,7 @@ body .container {
 }
 
 .logo:hover { 
-  transform: scale(1.25,1.25); 
+  transform: scale(1.15,1.15); 
 }
 
 // @media (min-width: 500px) {
