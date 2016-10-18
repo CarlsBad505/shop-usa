@@ -6,6 +6,11 @@
   )
 end
 
+User.create!(
+    email: 'carl@tabrific.com',
+    password: 'Yellow123'
+  )
+
 users = User.all
 
 20.times do
@@ -14,6 +19,15 @@ users = User.all
     shipping_charge: Faker::Number.number(3),
     track_package: Faker::Internet.url,
     user: users.sample
+  )
+end
+
+5.times do
+   Order.create!(
+    description: Faker::Lorem.sentence(word_count = 6),
+    shipping_charge: Faker::Number.number(3),
+    track_package: Faker::Internet.url,
+    user: User.last
   )
 end
   

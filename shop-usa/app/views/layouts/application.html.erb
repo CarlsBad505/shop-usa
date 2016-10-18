@@ -20,18 +20,20 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <!--<a class="navbar-brand">-->
-          <!--  <%#= link_to "Courier USA", root_path %>-->
-          <!--</a>-->
           <a class="navbar-brand">
             <%= link_to image_tag(asset_path('logo.png', alt: "Courier USA"), class: "logo"), root_path %>
           </a>
         </div>
         <div class="collapse navbar-collapse" id="collapse">
           <ul class="nav navbar-nav pull-right hover-nav">
-            <% if user_signed_in? %>
+            <% if user_signed_in? && current_user.admin? %>
               <p class="navbar-text">Welcome <strong><%= current_user.email %>!</strong></p>
-              <li><%= link_to "My Account", edit_user_registration_path, class: 'navbar-link' %></li>
+              <li><%= link_to "Manage Orders", orders_path, class: 'navbar-link' %></li>
+              <li><%= link_to "Edit Profile", edit_user_registration_path, class: 'navbar-link' %></li>
+              <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'navbar-link' %></li>
+            <% elsif user_signed_in? %>
+              <p class="navbar-text">Welcome <strong><%= current_user.email %>!</strong></p>
+              <li><%= link_to "My Orders", myorders_path, class: 'navbar-link' %></li>
               <li><%= link_to "Edit Profile", edit_user_registration_path, class: 'navbar-link' %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'navbar-link' %></li>
             <% else %>

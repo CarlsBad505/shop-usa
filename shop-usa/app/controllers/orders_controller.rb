@@ -5,6 +5,11 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.all
   end
+  
+  # Use this method to display orders who belong to a specific user
+  def user_index
+    @myorders = current_user.orders
+  end
 
   def show
     @order = Order.find(params[:id])
@@ -14,8 +19,11 @@ class OrdersController < ApplicationController
     @order = Order.new
   end
 
-  def create
-    @order = current_user.orders.build(order_params)
+  # Use this method for admins to create charges and orders, must link to a specific user
+  def create(email)
+    @user = find_user(email)
+    @order = Orders.build(order_params)
+    
     if @order.save
        # Do Something / Flash Message
     else
@@ -41,7 +49,13 @@ class OrdersController < ApplicationController
   
   private
   
+  def find_user(email)
+    user = User.where(email: email)
+    user_id = user[0][:id]
+    User.find(user_id)
+  end
+  
   def order_params
-    params.require(:order).permit(:description, :shipping_charge, :track_package)
+    params.require(:order).permit(:description, :shipping_charge, :track_package, :user_id)
   end
 end
