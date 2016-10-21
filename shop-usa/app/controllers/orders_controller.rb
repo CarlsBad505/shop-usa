@@ -21,15 +21,20 @@ class OrdersController < ApplicationController
 
   # Use this method for admins to create charges and orders, must link to a specific user
   def create
-    chosen_user = find_user(order_params[:user_id])
-    @order = chosen_user.orders.create(order_params)
-    
-    if @order.save
-       # Do Something / Flash Message
-    else
-       # Do Something / Flash Message
+    begin
+      chosen_user = find_user(order_params[:user_id])
+      @order = chosen_user.orders.create(order_params)
+      
+      if @order.save
+         flash[:notice] = "Order was created successfully!"
+         redirect_to orders_path
+      else
+         flash[:error] = "Error: Make sure the user exists or type in the correct user email."
+      end
+    rescue
+      flash[:error] = "Error: Make sure the user exists or type in the correct user email."
+      redirect_to new_order_path
     end
-    
   end
 
   def edit
