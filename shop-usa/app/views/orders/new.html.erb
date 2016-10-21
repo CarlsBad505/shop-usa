@@ -1,6 +1,35 @@
-<h1>Create A New Order</h1>
+<div class="container">
 
-<%= form_for([@user, @order]) do |f| %>
+<% if current_user.admin? %>
+  <h1>Create A New Order</h1>
   
+  <%= form_for([@user, @order]) do |f| %>
+    <div class="form-group">
+      <%= f.label 'Enter User Email' %>
+      <%= f.email_field :user_id, autofocus: true, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label 'Description' %>
+      <%= f.text_field :description, autofocus: false, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label 'Shipping Charge' %>
+      <%= f.number_field :shipping_charge, autofocus: false, class: "form-control" %>
+    </div>
+    
+     <div class="form-group">
+      <%= f.label 'Track Package' %>
+      <%= f.url_field :track_package, autofocus: false, class: "form-control" %>
+    </div>
+    
+     <div class="form-group">
+      <%= f.submit "Create New Order!", class: "btn btn-success" %>
+     </div>
+  <% end %>
+<% else %>
+  <p>You are not authorized to view this page</p>
 <% end %>
+</div>
 
