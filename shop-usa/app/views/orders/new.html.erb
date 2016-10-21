@@ -3,7 +3,7 @@
 <% if current_user.admin? %>
   <h1>Create A New Order</h1>
   
-  <%= form_for([@user, @order]) do |f| %>
+  <%= form_for @order do |f| %>
     <div class="form-group">
       <%= f.label 'Enter User Email' %>
       <%= f.email_field :user_id, autofocus: true, class: "form-control" %>

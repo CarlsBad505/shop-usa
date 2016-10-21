@@ -20,9 +20,9 @@ class OrdersController < ApplicationController
   end
 
   # Use this method for admins to create charges and orders, must link to a specific user
-  def create(email)
-    @user = find_user(email)
-    @order = Orders.build(order_params)
+  def create
+    chosen_user = find_user(order_params[:user_id])
+    @order = chosen_user.orders.create(order_params)
     
     if @order.save
        # Do Something / Flash Message
@@ -52,7 +52,7 @@ class OrdersController < ApplicationController
   def find_user(email)
     user = User.where(email: email)
     user_id = user[0][:id]
-    User.find(user_id)
+    return User.find(user_id)
   end
   
   def order_params
