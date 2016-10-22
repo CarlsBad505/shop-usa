@@ -18,7 +18,11 @@
           <td><%= number_to_currency(order.shipping_charge) %></td>
           <td><%= order.track_package %></td>
           <td><%= human_boolean(order.paid) %></td>
-          <td><%= link_to "Pay", '#', class: 'btn btn-success' %></td>
+          <% if order.paid === false %>
+            <td><%= link_to "Pay", '#', class: 'btn btn-success' %></td>
+          <% else %>
+            <td></td>
+          <% end %>
         </tr>
       <% end %>
     </tbody>
