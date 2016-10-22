@@ -38,9 +38,19 @@ class OrdersController < ApplicationController
   end
 
   def edit
+    @order = Order.find(params[:id])
   end
 
   def update
+    @order = Order.find(params[:id])
+    @order.assign_attributes(order_params)
+    if @order.save
+      flash[:notice] = "The order was updated successfully!"
+      redirect_to orders_path
+    else
+      flash[:error] = "Make sure you didn't leave any required fields blank."
+      render :edit
+    end
   end
 
   def destroy

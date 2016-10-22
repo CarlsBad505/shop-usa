@@ -1,6 +1,12 @@
 <section class="hero-content">
   <h1 class="hero-title">Shop Courier USA</h1> 
   <div class="text-center">
-    <%= link_to "Sign Up!", new_user_registration_path, class: 'btn' %>
+    <% if current_user && current_user.admin? %>
+      <%= link_to "Manage Orders", orders_path, class: 'btn' %>
+    <% elsif current_user %>
+      <%= link_to "My Orders", myorders_path, class: 'btn' %>
+    <% else %>
+      <%= link_to "Sign Up!", new_user_registration_path, class: 'btn' %>
+    <% end %>
   </div>
 </section>

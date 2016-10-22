@@ -1,2 +1,34 @@
-<h1>Orders#edit</h1>
-<p>Find me in app/views/orders/edit.html.erb</p>
+<div class="container">
+  <% if current_user.admin? %>
+    <h1>Edit Order</h1>
+    <h4>Order ID: <%= "#" + "#{@order.id}" %></h4>
+    
+    <%= form_for @order do |f| %>
+      <div class="form-group">
+        <%= f.hidden_field :user_id, autofocus: true, class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label 'Description' %>
+        <%= f.text_field :description, autofocus: false, class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label 'Shipping Charge' %>
+        <%= f.number_field :shipping_charge, autofocus: false, class: "form-control" %>
+      </div>
+      
+       <div class="form-group">
+        <%= f.label 'Track Package' %>
+        <%= f.url_field :track_package, autofocus: false, class: "form-control" %>
+      </div>
+      
+       <div class="form-group">
+        <%= f.submit "Update Order!", class: "btn btn-success" %>
+        <%= link_to "Cancel", orders_path, class: 'btn btn-danger' %>
+       </div>
+    <% end %>
+  <% else %>
+    <p class="admin-access">You are not authorized to view this page!</p>
+  <% end %>
+</div>
