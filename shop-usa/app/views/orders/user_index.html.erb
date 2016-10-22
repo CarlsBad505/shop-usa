@@ -15,7 +15,7 @@
         <tr>
           <td><%= order.id %></td>
           <td><%= order.description %></td>
-          <td>$ <%= order.shipping_charge %></td>
+          <td><%= number_to_currency(order.shipping_charge) %></td>
           <td><%= order.track_package %></td>
           <td><%= human_boolean(order.paid) %></td>
           <td><%= link_to "Pay", '#', class: 'btn btn-success' %></td>

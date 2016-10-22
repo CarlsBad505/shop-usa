@@ -10,11 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161022205640) do
+ActiveRecord::Schema.define(version: 20161022211706) do
 
   create_table "orders", force: :cascade do |t|
     t.text     "description"
-    t.integer  "shipping_charge"
+    t.float    "shipping_charge"
     t.string   "track_package"
     t.integer  "user_id"
     t.datetime "created_at",                      null: false
