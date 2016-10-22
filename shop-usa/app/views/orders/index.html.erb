@@ -12,6 +12,7 @@
           <th>Description</th>
           <th>Shipping Charge</th>
           <th>Track Package</th>
+          <th>Paid?</th>
           <th>Edit Order</th>
         </tr>
       </thead>
@@ -22,6 +23,7 @@
             <td><%= order.description %></td>
             <td>$ <%= order.shipping_charge %></td>
             <td><%= order.track_package %></td>
+            <td><%= human_boolean(order.paid) %></td>
             <td><%= link_to "Edit", edit_order_path(order), class: 'btn btn-primary btn-sm' %></td>
           </tr>
         <% end %>

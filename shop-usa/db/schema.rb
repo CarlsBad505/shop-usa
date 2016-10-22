@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161018030410) do
+ActiveRecord::Schema.define(version: 20161022205640) do
 
   create_table "orders", force: :cascade do |t|
     t.text     "description"
     t.integer  "shipping_charge"
     t.string   "track_package"
     t.integer  "user_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "paid",            default: false
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
 

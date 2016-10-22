@@ -54,11 +54,13 @@ class OrdersController < ApplicationController
   end
 
   def destroy
-    @order = current_user.orders.find(params[:id])
+    @order = Order.find(params[:id])
     if @order.destroy
-      # Do Something / Flash Message
+      flash[:notice] = "The order was deleted successfully!"
+      redirect_to orders_path
     else
-      # Do Something / Flash Message
+      flash[:error] = "Something went wrong, please try again."
+      render :edit
     end
   end
   
