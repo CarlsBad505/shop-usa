@@ -64,6 +64,33 @@ class OrdersController < ApplicationController
     end
   end
   
+  def pay
+    @order = Order.find(params[:id])
+    amount = @order.shipping_charge.round*100
+    description = @order.description
+    
+    customer = Stripe::Customer.create(
+      :email => params[:stripeEmail],
+      :source  => params[:stripeToken]
+    )
+    
+    charge = Stripe::Charge.create(
+      :customer    => customer.id,
+      :amount      => amount,
+      :description => description,
+      :currency    => 'usd'
+    )
+    
+    if charge
+      @order.update_attribute(:paid, true)
+      flash[:notice] = "You successfully paid your shipping charge!"
+      redirect_to myorders_path
+    end
+  rescue Stripe::CardError => e
+    flash[:error] = e.message
+    redirect_to myorders_path
+  end
+  
   private
   
   def find_user(email)
