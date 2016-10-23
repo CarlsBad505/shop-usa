@@ -26,7 +26,7 @@
             <td><%= order.description %></td>
             <td><%= number_to_currency(order.shipping_charge) %></td>
             <td><%= order.track_package %></td>
-            <td><%= human_boolean(order.paid) %></td>
+            <td><strong><%= human_boolean(order.paid) %></strong></td>
             <% if order.paid === false %>
               <td>
                 <%= form_tag("/pay/" + "#{order.id}", method: "post") do %>

@@ -29,7 +29,7 @@
             <td><%= order.description %></td>
             <td><%= number_to_currency(order.shipping_charge) %></td>
             <td><%= order.track_package %></td>
-            <td><%= human_boolean(order.paid) %></td>
+            <td><strong><%= human_boolean(order.paid) %></strong></td>
             <td><%= link_to "Edit", edit_order_path(order), class: 'btn btn-primary btn-sm' %></td>
           </tr>
         <% end %>
