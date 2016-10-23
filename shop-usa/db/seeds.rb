@@ -8,7 +8,8 @@ end
 
 User.create!(
     email: 'carl@tabrific.com',
-    password: 'Yellow123'
+    password: 'Yellow123',
+    admin: true
   )
 
 users = User.all
