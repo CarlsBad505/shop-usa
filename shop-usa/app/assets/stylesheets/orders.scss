@@ -5,3 +5,25 @@
 .admin-create {
   text-align: center;
 }
+
+.admin-title {
+  text-align: center;
+  font-family: fantasy;
+}
+
+.user-title {
+  text-align: center;
+  font-family: fantasy;
+}
+
+div.dataTables_length label {
+ font-weight: bold !important; 
+}
+
+div.dataTables_filter label {
+  font-weight: bold !important; 
+}
+
+.table-hover > tbody > tr:hover {
+  color: black;
+}

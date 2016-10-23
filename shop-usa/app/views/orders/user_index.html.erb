@@ -1,51 +1,63 @@
 <div class="container">
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Order ID</th>
-        <th>Description</th>
-        <th>Shipping Charge</th>
-        <th>Track Package</th>
-        <th>Paid?</th>
-        <th>Pay Charge</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @myorders.each do |order| %>
+  
+  <script>
+    $(document).ready(function() {
+      $('#table-user').dataTable();
+    });
+  </script>
+  
+  <% if current_user %>
+    <h1 class="user-title">My Orders</h1>
+    <table class="table table-hover" id="table-user">
+      <thead>
         <tr>
-          <td><%= order.id %></td>
-          <td><%= order.description %></td>
-          <td><%= number_to_currency(order.shipping_charge) %></td>
-          <td><%= order.track_package %></td>
-          <td><%= human_boolean(order.paid) %></td>
-          <% if order.paid === false %>
-            <td>
-              <%= form_tag("/pay/" + "#{order.id}", method: "post") do %>
-                <article>
-                  <% if flash[:error].present? %>
-                    <div id="error_explanation">
-                      <p><%= flash[:error] %></p>
-                    </div>
-                  <% end %>
-                </article>
-                
-                <script
-                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                  data-amount='<%= order.shipping_charge*100 %>'
-                  data-name="Shop Courier USA"
-                  data-description="Pay Your Shipping Charge"
-                  data-image="<%= image_path('package-icon.png') %>"
-                  data-locale="auto"
-                  data-allow-remember-me="false">
-                </script>
-              <% end %>
-            </td>
-          <% else %>
-            <td></td>
-          <% end %>
+          <th>Order ID</th>
+          <th>Description</th>
+          <th>Shipping Charge</th>
+          <th>Track Package</th>
+          <th>Paid?</th>
+          <th>Pay Charge</th>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        <% @myorders.each do |order| %>
+          <tr>
+            <td><%= order.id %></td>
+            <td><%= order.description %></td>
+            <td><%= number_to_currency(order.shipping_charge) %></td>
+            <td><%= order.track_package %></td>
+            <td><%= human_boolean(order.paid) %></td>
+            <% if order.paid === false %>
+              <td>
+                <%= form_tag("/pay/" + "#{order.id}", method: "post") do %>
+                  <article>
+                    <% if flash[:error].present? %>
+                      <div id="error_explanation">
+                        <p><%= flash[:error] %></p>
+                      </div>
+                    <% end %>
+                  </article>
+                  
+                  <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-amount='<%= order.shipping_charge*100 %>'
+                    data-name="Shop Courier USA"
+                    data-description="Pay Your Shipping Charge"
+                    data-image="<%= image_path('package-icon.png') %>"
+                    data-locale="auto"
+                    data-allow-remember-me="false">
+                  </script>
+                <% end %>
+              </td>
+            <% else %>
+              <td></td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="admin-access">You are not authorized to view this page!</p>
+  <% end %>
 </div>

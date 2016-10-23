@@ -1,11 +1,17 @@
 <div class="container">
+  <script>
+    $(document).ready(function() {
+      $('#table-admin').dataTable();
+    });
+  </script>
   
   <% if current_user.admin? %>
+    <h1 class="admin-title">Administrative Panel</h1>
     <div class="admin-create">
       <%= link_to '+ Create New Order', new_order_path, class: 'btn btn-success btn-lg' %>
     </div>
     <br />
-    <table class="table table-hover">
+    <table class="table table-hover" id="table-admin">
       <thead>
         <tr>
           <th>Order ID</th>
