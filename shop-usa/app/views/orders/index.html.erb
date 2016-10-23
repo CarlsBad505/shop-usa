@@ -1,9 +1,10 @@
 <div class="container">
-  <script>
-    $(document).ready(function() {
-      $('#table-admin').dataTable();
-    });
-  </script>
+  
+   <script>
+     $(document).ready(function() {
+       $('#table-admin').dataTable();
+     });
+   </script>
   
   <% if current_user.admin? %>
     <h1 class="admin-title">Administrative Panel</h1>
