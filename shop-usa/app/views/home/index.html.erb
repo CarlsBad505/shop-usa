@@ -1,13 +1,16 @@
 <section class="hero-content">
-  <h1 class="hero-title">Shop Courier USA</h1>
   <div class="text-center">
     <% if current_user && current_user.admin? %>
+      <h1 class="hero-title">Shop Courier USA</h1>
       <%= link_to "Manage Orders", orders_path, class: 'btn' %>
     <% elsif current_user %>
+      <h1 class="hero-title">Shop Courier USA</h1>
       <%= link_to "My Orders", myorders_path, class: 'btn' %>
     <% else %>
-      <p class="hero-subtitle">Sign In To View and Pay Your Packages!</p>
-      <%= link_to "Sign In!", new_user_session_path, class: 'btn' %>
+      <div class="custom-btn">
+         <%= link_to image_tag('login_btn.png', class: 'login-btn'), new_user_session_path %>
+      </div>
+      <p class="hero-subtitle">Please Sign In To View and Pay Your Shipping Charge And We Will Send You Your Tracking Number</p>
     <% end %>
   </div>
 </section>
