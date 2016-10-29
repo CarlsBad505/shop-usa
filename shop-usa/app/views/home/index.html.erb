@@ -8,9 +8,8 @@
       <%= link_to "My Orders", myorders_path, class: 'btn' %>
     <% else %>
       <div class="custom-btn">
-         <%= link_to image_tag('login_btn.png', class: 'login-btn'), new_user_session_path %>
+         <%= link_to image_tag('custom-btn.png', class: 'login-btn'), new_user_session_path %>
       </div>
-      <p class="hero-subtitle">Please Sign In To View and Pay Your Shipping Charge And We Will Send You Your Tracking Number</p>
     <% end %>
   </div>
 </section>
