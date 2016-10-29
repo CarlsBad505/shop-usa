@@ -83,7 +83,7 @@ class OrdersController < ApplicationController
     
     if charge
       @order.update_attribute(:paid, true)
-      @order.update_attribute(:track_package, 'Check back soon for track package information!') # <--- Need to change this field to text string.
+      @order.update_attribute(:track_package, 'Check back soon for package tracking information!')
       flash[:notice] = "You successfully paid your shipping charge! Check back soon for shipping information."
       redirect_to myorders_path
     end
