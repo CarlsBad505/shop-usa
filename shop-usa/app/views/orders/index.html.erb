@@ -8,6 +8,8 @@
   
   <% if current_user.admin? %>
     <h1 class="admin-title">Administrative Panel</h1>
+    <p class="admin-instructions">*To create a new user, logout and go to this link:</p>
+    <p class="admin-instructions"><strong>http://www.shopcourierusallc.com/users/sign_up</strong></p>
     <div class="admin-create">
       <%= link_to '+ Create New Order', new_order_path, class: 'btn btn-success btn-lg' %>
     </div>
