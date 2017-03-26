@@ -15,3 +15,8 @@
 //= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+setTimeout(function(){
+  $('.flash').remove();
+  $('body').css("margin-top", "50");
+}, 4000);

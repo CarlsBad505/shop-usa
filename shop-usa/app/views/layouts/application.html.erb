@@ -14,7 +14,7 @@
   </head>
 
   <body class="background">
-    
+
     <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
@@ -41,13 +41,14 @@
               <li><%= link_to "Edit Profile", edit_user_registration_path, class: 'navbar-link' %></li>
               <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: 'navbar-link' %></li>
             <% else %>
+              <li><%= link_to "Sign Up", new_user_registration_path, class: 'navbar-link' %></li>
               <li><%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %></li>
             <% end %>
           </ul>
         </div>
       </div>
     </nav>
-    
+
     <div class="flash">
       <% if flash[:notice] %>
         <div class="alert alert-success">
@@ -66,15 +67,7 @@
         </div>
       <% end %>
     </div>
-    
-    <script type="text/javascript">
-      $(document).ready(function(){
-        setTimeout(function(){
-          $('.flash').remove();
-        }, 4000);
-       })
-    </script>
-    
+
     <%= yield %>
     <%= render 'layouts/footer' %>
   </body>
