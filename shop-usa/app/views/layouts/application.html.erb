@@ -43,6 +43,7 @@
             <% else %>
               <li><%= link_to "Sign Up", new_user_registration_path, class: 'navbar-link' %></li>
               <li><%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %></li>
+              <li id="cart-text"><%= render "layouts/cart_text" %></li>
             <% end %>
           </ul>
         </div>
@@ -69,6 +70,6 @@
     </div>
 
     <%= yield %>
-    <%= render 'layouts/footer' %>
+    <%#= render 'layouts/footer' %>
   </body>
 </html>

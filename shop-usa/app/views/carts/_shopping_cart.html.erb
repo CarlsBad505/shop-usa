@@ -1,0 +1,18 @@
+<% if !@order_item.nil? && @order_item.errors.any? %>
+  <div class="alert alert-danger">
+    <ul>
+    <% @order_item.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<% if @order_items.size == 0 %>
+  <p class="text-center">Your shopping cart is currently empty!</p>
+  <%= link_to "Shop Now!", root_path, class: 'btn btn-primary' %>
+<% else %>
+  <% @order_items.each do |oi| %>
+    <%= render 'carts/carts_row', product: oi.product, order_item: oi, show_total: true %>
+  <% end %>
+<% end %>
