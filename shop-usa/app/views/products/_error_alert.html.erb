@@ -1,0 +1,10 @@
+<div class="alert alert-danger alert-dismissable">
+  <button type="button" id="close-alrt" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+  <% if @message.errors.any? %>
+    <ul>
+      <% @message.errors.full_messages.each do |msg| %>
+        <li><strong><%= msg %></strong></li>
+      <% end %>
+    </ul>
+  <% end %>
+</div>

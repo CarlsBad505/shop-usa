@@ -1,0 +1,21 @@
+<div class="">
+  <p><strong>Hey Courier USA, you have a new product inquiry!</strong></p>
+</div>
+
+<div class="">
+  <p><strong>Inquirer Details:</strong></p>
+  <ul>
+    <li>First Name: <%= "#{@message.first_name}" %></li>
+    <li>Last Name: <%= "#{@message.last_name}" %></li>
+    <li>Email: <%= "#{@message.email_address}" %></li>
+    <% if @message.phone %>
+      <li>Phone: <%= "#{@message.phone}" %></li>
+    <% end %>
+    <li>Link To Product: <%= "#{@message.url}" %></li>
+  </ul>
+</div>
+
+<div class="">
+  <p><strong>Message:</strong></p>
+  <p><%= "#{@message.note}" %></p>
+</div>

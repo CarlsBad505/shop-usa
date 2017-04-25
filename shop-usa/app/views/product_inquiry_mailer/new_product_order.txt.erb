@@ -1,0 +1,17 @@
+Hey Courier USA, you have a new product order!
+
+Order Details:
+<% @message[:order_items].each do |oi| %>
+  Product Name: <%= oi.product.name %>
+  Price Paid: <%= number_to_currency(oi.product.price) %>
+  Quantity: <%= oi.quantity %>
+<% end %>
+
+Shipping Details:
+  Name: <%= "#{@message[:name]}" %>
+  Email: <%= "#{@message[:email]}" %>
+  Shipping Address: <%= "#{@message[:shipping_line1]}" %>
+  Shipping City: <%= "#{@message[:shipping_city]}" %>
+  Shipping State: <%= "#{@message[:shipping_state]}" %>
+  Shipping Zip Code: <%= "#{@message[:shipping_zip]}" %>
+  Shipping Country: <%= "#{@message[:shipping_country]}" %>

@@ -16,7 +16,30 @@
 //= require turbolinks
 //= require_tree .
 
-setTimeout(function(){
-  $('.flash').remove();
-  $('body').css("margin-top", "50");
+setTimeout(function() {
+  if ($('.flash:visible').length == 0) {
+    $('.flash').remove();
+  }
 }, 4000);
+
+function initSlider() {
+  $(".Modern-Slider").slick({
+    autoplay:true,
+    autoplaySpeed:5000,
+    speed:900,
+    slidesToShow:1,
+    slidesToScroll:1,
+    pauseOnHover:false,
+    dots:true,
+    pauseOnHover:false,
+    cssEase:'linear',
+    fade:true,
+    draggable:false,
+    prevArrow:'<button class="PrevArrow"></button>',
+    nextArrow:'<button class="NextArrow"></button>',
+  });
+}
+
+$('#close-alrt').click(function() {
+  $('#inquiry-div').show();
+});

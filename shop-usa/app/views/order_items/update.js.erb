@@ -1,2 +1,5 @@
-$(".cart-text").html("<%= j render 'layouts/cart_text' %>");
-$(".shopping-cart").html("<%= j render 'carts/shopping_cart' %>");
+$("#cart-text").html('<%= j render 'layouts/cart_text' %>');
+<% if @order.order_items.size > 0 %>
+  $(".cart-text").css("color", "#009688");
+<% end %>
+$(".shopping-cart").html('<%= j render 'carts/shopping_cart' %>');

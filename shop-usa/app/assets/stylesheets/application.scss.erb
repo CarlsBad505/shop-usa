@@ -16,31 +16,50 @@
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
+
+$navbar-link-color: #ccc;
+$navbar-link_hover: #FED100;
+$brand-font: 'helvetica';
+$brand-color: #FED100;
 
 body {
-  color: white;
-  margin-top: 50px;
+  margin-top: 70px;
 }
 
 .form-control {
 	width: 50%;
 }
 
-.background {
-	position: relative;
-	background-image: url(<%= asset_path('cover2_blur.jpg') %>);
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: cover;
-	height: 100vh;
+.devise-background {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background: linear-gradient(to right, #fff, #E8E8E8);
 }
 
-// body .container {
-//   margin-top: 50px;
-// }
+.devise-hr {
+  // max-width: 20em;
+  border-top: 2px solid $brand-color;
+  // margin-bottom: 30px;
+}
 
-body .index {
-  margin-bottom: 125px;
+.devise-btn {
+  color: black;
+  background-color: $brand-color;
+}
+
+.devise-btn:hover {
+  background-color: #9d9d9d !important;
+  color: white !important;
+  border: .15em solid black !important;
+}
+
+.devise-background input {
+  margin: auto;
+}
+
+.devise-center {
+  text-align: center;
 }
 
 .navbar {
@@ -48,6 +67,22 @@ body .index {
   background-color: black;
   // z-index: 1;
   border: none;
+}
+
+.navbar #cart-text {
+  padding-top: 1em;
+  color: $navbar-link-color;
+}
+
+.navbar-default .navbar-nav > li > a {
+	color: $navbar-link-color;
+	font-family: $brand-font;
+	font-weight: bold;
+}
+
+.navbar-default .navbar-link:hover {
+  color: $navbar-link_hover;
+  text-decoration: none !important;
 }
 
 .navbar .logo {
@@ -58,15 +93,15 @@ body .index {
 }
 
 .navbar-default .navbar-nav > li > a {
-  color: white;
+  color: $navbar-link-color;
 }
 
 .navbar-default .navbar-nav > li > a:hover {
-  color: #FED100;
+  color: $navbar-link_hover;
 }
 
 .navbar-default .navbar-text {
-  color: white;
+  color: $navbar-link-color;
 }
 
 .logo:hover {
@@ -87,9 +122,12 @@ body .index {
   color: red;
 }
 
-#footer {
-	position: fixed;
-	bottom: 0;
+.footer {
+  // position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
 }
 
 .footer-basic-centered{
@@ -98,7 +136,7 @@ body .index {
 	box-sizing: border-box;
 	width: 100%;
 	text-align: center;
-	font: normal 18px #ffffff;
+	font-size: normal 18px #ffffff;
 	padding: 25px;
 	margin-top: 0px;
 }

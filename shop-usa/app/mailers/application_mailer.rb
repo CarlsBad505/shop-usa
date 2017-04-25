@@ -1,4 +1,6 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'from@example.com'
+  include SendGrid
+
+  default from: 'from@courierusallc.com'
   layout 'mailer'
 end

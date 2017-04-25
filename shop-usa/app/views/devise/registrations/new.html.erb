@@ -1,32 +1,38 @@
-<div class="container">
-  <h2>Sign Up</h2>
-  
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= devise_error_messages! %>
-  
-    <div class="form-group">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autofocus: true, class: "form-control" %>
-    </div>
-  
-    <div class="form-group">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-      <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-    </div>
-  
-    <div class="form-group">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
-    </div>
-  
-    <div class="form-group">
-      <%= f.submit "Sign Up", class: "btn btn-primary" %>
-    </div>
-  <% end %>
+<div class="devise-background">
 
-  <br />
-  <%= render "devise/shared/links" %>
+  <div class="container devise-center">
+    <h1>Sign Up</h1>
+    <hr class="devise-hr" />
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autofocus: true, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Sign Up", class: "btn devise-btn" %>
+      </div>
+    <% end %>
+
+    <br />
+    <%= render "devise/shared/links" %>
+  </div>
+
 </div>
+
+<%= render 'layouts/footer' %>

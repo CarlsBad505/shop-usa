@@ -1,15 +1,146 @@
-<section class="hero-content">
-  <div class="text-center">
-    <% if current_user && current_user.admin? %>
-      <h1 class="hero-title">Shop Courier USA</h1>
-      <%= link_to "Manage Orders", orders_path, class: 'btn' %>
-    <% elsif current_user %>
-      <h1 class="hero-title">Shop Courier USA</h1>
-      <%= link_to "My Orders", myorders_path, class: 'btn' %>
-    <% else %>
-      <div class="custom-btn">
-         <%= link_to image_tag('custom-btn.png', class: 'login-btn'), new_user_session_path %>
+<div class="index-home">
+
+  <div class="Modern-Slider">
+    <div class="item">
+      <div class="img-fill">
+        <%= image_tag 'wood-background.jpg' %>
+        <div class="info">
+          <div>
+            <h3>Unique Product Offerings, Shipped & Tailored For You</h3>
+            <h5><%= link_to 'Browse Now', products_path, class: 'btn btn-primary btn-lg btn-slider' %></h5>
+          </div>
+        </div>
       </div>
-    <% end %>
+    </div>
+    <div class="item">
+      <div class="img-fill">
+        <%= image_tag 'cover1.jpg' %>
+        <div class="info">
+          <div>
+            <h3>Stand Up Paddle Boards | $199</h3>
+            <h5><%= link_to 'Buy Now', products_path, class: 'btn btn-primary btn-lg btn-slider' %></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="item">
+      <div class="img-fill">
+        <img src="https://googledrive.com/host/0B1RR6fhjI2QRbXA4RjVjQ2NxeFk/3.jpg" alt="">
+        <div class="info">
+          <div>
+            <h3>Awesome Transtions With CSS3</h3>
+            <h5>Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet. Sed eleifend felis quis massa viverra</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img-fill">
+        <img src="https://googledrive.com/host/0B1RR6fhjI2QRbXA4RjVjQ2NxeFk/4.jpg" alt="">
+        <div class="info">
+          <div>
+            <h3>Separate settings per breakpoint</h3>
+            <h5>Donec id ornare dui. Aenean tristique condimentum elit, quis blandit nisl varius sit amet. Sed eleifend felis quis massa viverra</h5>
+          </div>
+        </div>
+      </div>
+    </div> -->
   </div>
-</section>
+
+  <section>
+    <div class="container selling-points">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="section-heading header-fnt">SOURCING PRODUCTS DIRECT TO YOU</h1>
+          <!-- <p class="lead section-lead sub-header-fnt">Sourcing products direct to you. No limitations coupled with easy tracking and processing.</p> -->
+        </div>
+      </div>
+      <hr class="selling-hr">
+      <div class="row">
+        <div class="col-md-4">
+          <i class="fa fa-unlock fa-home fa-4x" aria-hidden="true"></i>
+          <p class="selling-point header-fnt">Unlock American Brands and Products</p>
+        </div>
+        <div class="col-md-4">
+          <i class="fa fa-certificate fa-home fa-4x" aria-hidden="true"></i>
+          <p class="selling-point-mid header-fnt">Trusted and Certified Vendors</p>
+        </div>
+        <div class="col-md-4">
+          <i class="fa fa-plane fa-home fa-4x" aria-hidden="true"></i>
+          <p class="selling-point header-fnt">Personalized US Shipping Address</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="image-bg-fixed-height">
+    <div class="row">
+      <div class="col-md-2">
+        <%= image_tag 'target-logo.png', class: 'img-responsive logo-img' %>
+      </div>
+      <div class="col-md-2">
+        <%= image_tag 'restorationhardware-logo.png', class: 'img-responsive logo-img' %>
+      </div>
+      <div class="col-md-2">
+        <%= image_tag 'target-logo.png', class: 'img-responsive logo-img' %>
+      </div>
+      <div class="col-md-2">
+        <%= image_tag 'restorationhardware-logo.png', class: 'img-responsive logo-img' %>
+      </div>
+      <div class="col-md-2">
+        <%= image_tag 'target-logo.png', class: 'img-responsive logo-img' %>
+      </div>
+      <div class="col-md-2">
+        <%= image_tag 'restorationhardware-logo.png', class: 'img-responsive logo-img' %>
+      </div>
+    </div>
+  </aside>
+
+  <section>
+    <div class="container enterprise">
+      <div class="row">
+        <div class="col-md-8">
+          <%= image_tag 'enterprise1.png', class: 'img-responsive img-rounded img-home-enterprise' %>
+        </div>
+        <div class="col-md-4">
+          <h1 class='header-fnt'>Enterprise Accounts</h1>
+          <p class='sub-header-fnt'>Looking for help sourcing products or materials? Need dedicated account management? Contact us for more details!</p>
+          <%= link_to "Learn More", enterprise_path, class: 'btn btn-primary btn-lg btn-slider sub-header-fnt' %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer-basic-centered">
+    <p class="footer-company-motto"><strong>Shipment Disclaimer:</strong> Courier USA, LLC will not ship any illegal materials under any circumstance.</p>
+    <p class="footer-company-motto"><strong>Privacy Policy:</strong> Courier USA, LLC will not share any private information with anyone that is unneccessary to fulfill our duties and obligations to our clients.</p>
+    <p class="footer-company-motto"><strong>International Shipping:</strong> We reserve the right and obligation to inspect the contents of any package to ensure that there are no illegal contents.</p>
+    <p class="footer-company-name">Courier USA LLC © 2017, All Rights Reserved</p>
+  </footer>
+
+</div>
+
+<script type="text/javascript">
+  setTimeout(function() {
+    initSlider();
+  }, 100);
+
+  window.sr = ScrollReveal({ reset: true });
+
+  sr.reveal('.fa-home',
+    {
+      duration: 2200,
+      origin: 'top',
+      rotate: { x: 0, y: 90, z: 90},
+      mobile: true,
+    }
+  );
+
+  sr.reveal('.img-home-enterprise',
+    {
+      duration: 2200,
+      origin: 'left',
+      mobile: true,
+    }
+  );
+</script>

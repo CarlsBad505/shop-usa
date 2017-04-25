@@ -1,11 +1,11 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  
+
   # Use this method to display orders on the Admin Page
   def index
     @orders = Order.all
   end
-  
+
   # Use this method to display orders who belong to a specific user
   def user_index
     @myorders = current_user.orders
@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
     begin
       chosen_user = find_user(order_params[:user_id])
       @order = chosen_user.orders.create(order_params)
-      
+
       if @order.save
          flash[:notice] = "Order was created successfully!"
          redirect_to orders_path
@@ -63,24 +63,24 @@ class OrdersController < ApplicationController
       render :edit
     end
   end
-  
+
   def pay
     @order = Order.find(params[:id])
     amount = @order.shipping_charge.round*100
     description = @order.description
-    
+
     customer = Stripe::Customer.create(
       :email => params[:stripeEmail],
       :source  => params[:stripeToken]
     )
-    
+
     charge = Stripe::Charge.create(
       :customer    => customer.id,
       :amount      => amount,
       :description => description,
       :currency    => 'usd'
     )
-    
+
     if charge
       @order.update_attribute(:paid, true)
       @order.update_attribute(:track_package, 'Check back soon for package tracking information!')
@@ -91,15 +91,15 @@ class OrdersController < ApplicationController
     flash[:error] = e.message
     redirect_to myorders_path
   end
-  
+
   private
-  
+
   def find_user(email)
     user = User.where(email: email)
     user_id = user[0][:id]
     return User.find(user_id)
   end
-  
+
   def order_params
     params.require(:order).permit(:description, :shipping_charge, :track_package, :user_id)
   end

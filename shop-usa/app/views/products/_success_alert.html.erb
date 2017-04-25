@@ -1,0 +1,16 @@
+<div class="alert alert-success alert-dismissable">
+  <button type="button" id="close-alrt" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+  <div class="row">
+    <i class="fa fa-rocket fa-5x" aria-hidden="true"></i>
+  </div>
+  <div class="row">
+    <b>Thanks you for your inquiry, we will be back in touch within 2 business days!</b>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#close-alrt').click(function() {
+    $('.input-custom-inquiry').val('');
+    $('#inquiry-div').show();
+  });
+</script>

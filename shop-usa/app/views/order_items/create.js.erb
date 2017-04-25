@@ -1,5 +1,8 @@
 <% if @order.errors.any? || @order_item.errors.any? %>
-  alert('not valid');
+  alert('Invalid Option');
 <% else %>
   $("#cart-text").html('<%= j render 'layouts/cart_text' %>');
+  <% if @order.order_items.size > 0 %>
+    $(".cart-text").css("color", "#009688");
+  <% end %>
 <% end %>

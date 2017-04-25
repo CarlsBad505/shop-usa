@@ -1,0 +1,73 @@
+<div class="index-enterprise">
+
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <div class="section-heading">
+                <h2>Let's Partner Up</h2>
+                <p class="text-muted">We've got your back for all commercial needs. From sourcing to account management to shipping, send us a message to find out how we can help your business operations</p>
+                <hr class="hiws-hr">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="well-enterprise well-sm">
+          <div class="form-horizontal">
+          <%= form_for @message, url: home_index_path, method: :post, remote: true do |f| %>
+            <fieldset>
+              <legend class="text-center header">Contact Us For Commercial Inquries</legend>
+              <div id="inquiry-alrt-success-commercial"></div>
+              <div id="inquiry-alrt-error-commercial"></div>
+              <div id="inquiry-div-commercial">
+              <%= f.hidden_field :url, value: "n/a"%>
+                <div class="form-group">
+                    <span class="col-md-1 col-md-offset-3 text-center"><i class="fa fa-user fa-2x bigicon"></i></span>
+                    <div class="col-md-8">
+                        <%= f.text_field :first_name, class: "form-control input-custom-inquiry", placeholder: "First Name"%>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="col-md-1 col-md-offset-3 text-center"><i class="fa fa-user fa-2x bigicon"></i></span>
+                    <div class="col-md-8">
+                        <%= f.text_field :last_name, class: "form-control input-custom-inquiry", placeholder: "Last Name" %>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="col-md-1 col-md-offset-3 text-center"><i class="fa fa-envelope-o fa-2x bigicon"></i></span>
+                    <div class="col-md-8">
+                        <%= f.email_field :email_address, class: "form-control input-custom-inquiry", placeholder: "Email Address" %>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="col-md-1 col-md-offset-3 text-center"><i class="fa fa-phone-square fa-2x bigicon"></i></span>
+                    <div class="col-md-8">
+                        <%= f.phone_field :phone, class: "form-control input-custom-inquiry", placeholder: "Phone" %>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <span class="col-md-1 col-md-offset-3 text-center"><i class="fa fa-pencil-square-o fa-2x bigicon"></i></span>
+                    <div class="col-md-8">
+                        <%= f.text_area :note, class: "form-control input-custom-inquiry", placeholder: "Enter your massage for us here. We will get back to you within 2 business days.", rows: 7 %>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-12 text-center">
+                        <%= f.submit "Submit", class: 'btn btn-primary btn-lg btn-slider' %>
+                    </div>
+                </div>
+              </div>
+            </fieldset>
+          <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render 'layouts/footer' %>
+</div>

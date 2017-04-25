@@ -1,3 +1,69 @@
-// Place all the styles related to the Products controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+$brand-color: #FED100;
+$border-color: #292c2f;
+
+.index-products {
+  padding-top: 50px;
+  background: linear-gradient(to right, #fff, #E8E8E8);
+}
+
+#inquiry-alrt-error {
+  width: 50%;
+  margin: auto;
+  margin-bottom: 1em;
+}
+
+#inquiry-alrt-success {
+  text-align: center;
+}
+
+.list-group-item {
+  font-weight: bold;
+  text-align: center;
+  border: 1.5px solid #9d9d9d !important;
+}
+
+a.list-group-item:hover {
+  background-color: rgba(254,209,0,0.5) !important;
+}
+
+.thumbnail {
+  border: 1.5px solid #9d9d9d !important;
+}
+
+.add-cart {
+  background-color: #fff;
+  border: none;
+  width: 4em;
+  color: #427fca;
+  font-size: 1.25em;
+}
+
+.add-cart:hover {
+  color: #009688 !important;
+}
+
+.btn-cart:hover {
+  background-color: $brand-color !important;
+  color: black !important;
+  border-color: black !important;
+}
+
+.product-qty {
+  width: 15%;
+  border: 1px solid black;
+  margin-top: .2em;
+}
+
+.fa-comments-o {
+  color: $brand-color;
+}
+
+.fa-suitcase {
+  color: $brand-color;
+}
+
+.btn-slider:hover {
+  background-color: #9d9d9d !important;
+  color: white !important;
+  border: .15em solid black !important;
+}

@@ -1,18 +1,60 @@
-<% if !@order_item.nil? && @order_item.errors.any? %>
-  <div class="alert alert-danger">
-    <ul>
-    <% @order_item.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
-
-<% if @order_items.size == 0 %>
-  <p class="text-center">Your shopping cart is currently empty!</p>
-  <%= link_to "Shop Now!", root_path, class: 'btn btn-primary' %>
-<% else %>
-  <% @order_items.each do |oi| %>
-    <%= render 'carts/carts_row', product: oi.product, order_item: oi, show_total: true %>
+<div class="cart-background">
+  <% if !@order_item.nil? && @order_item.errors.any? %>
+    <div class="alert alert-danger">
+      <ul>
+      <% @order_item.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
   <% end %>
-<% end %>
+
+  <% if @order_items.size == 0 %>
+    <div style="text-align:center;">
+      <p class="text-center empty-actions-msg">Your shopping cart is currently empty!</p>
+      <%= link_to "Shop Now!", products_path, class: 'btn btn-lg btn-cart' %>
+    </div>
+  <% elsif @order.paid == false %>
+      <% @order_items.each do |oi| %>
+        <%= render 'carts/carts_row', product: oi.product, order_item: oi, show_total: true %>
+      <% end %>
+      <div class="row" style="margin-right: 0px;">
+        <div class="col-xs-6 pull-right well cart-grand-total">
+          <div class="col-xs-6" style="text-align:center;">
+            <%= form_tag("/pay", method: "post") do %>
+              <article>
+                <% if flash[:error].present? %>
+                  <div id="error_explanation">
+                    <p><%= flash[:error] %></p>
+                  </div>
+                <% end %>
+              </article>
+              <div style="margin-top:3em;">
+                <script
+                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-amount='<%= @order.total*100 %>'
+                  data-name="Courier USA"
+                  data-description="Pay Your Shipping Charge"
+                  data-image="<%= image_path('package-icon.png') %>"
+                  data-locale="auto"
+                  data-allow-remember-me="false"
+                  data-billing-address="true"
+                  data-zip-code="true"
+                  data-shipping-address="true"
+                  data-label="Checkout">
+                </script>
+              </div>
+            <% end %>
+          </div>
+          <div class="col-xs-6 text-right">
+            <p class="grand">Shipping: <%= number_to_currency(@order.shipping) ? number_to_currency(@order.shipping) : number_to_currency(0) %></p>
+            <p class="grand">Tax: <%= number_to_currency(@order.tax) ? number_to_currency(@order.tax) : number_to_currency(0) %></p>
+            <p class='grand-total'>Grand Total: <%= number_to_currency(@order.total) %></p>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>
+
+<%= render 'layouts/footer' %>

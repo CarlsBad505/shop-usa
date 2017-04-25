@@ -18,6 +18,9 @@ gem 'devise'
 gem 'figaro', '1.0'
 gem 'faker'
 gem 'stripe'
+gem 'font-awesome-rails'
+gem 'sendgrid'
+gem 'active_attr'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

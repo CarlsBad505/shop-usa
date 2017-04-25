@@ -1,0 +1,9 @@
+<% if @message.errors.any? %>
+  $alert_partial = $('<%= j render 'home/error_alert' %>');
+  $('#inquiry-alrt-error-commercial').html($alert_partial);
+<% else %>
+  $alert_partial = $('<%= j render 'home/success_alert' %>');
+  $('#inquiry-alrt-error-commercial').hide();
+  $('#inquiry-div-commercial').hide();
+  $('#inquiry-alrt-success-commercial').html($alert_partial);
+<% end %>

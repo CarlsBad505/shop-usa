@@ -1,0 +1,14 @@
+Hey Courier USA, you have a new product inquiry!
+
+Inquirer Details:
+
+First Name: <%= "@message.first_name" %>
+Last Name: <%= "#{@message.last_name}" %>
+Email: <%= "#{@message.email_address}" %>
+<% if @message.phone %>
+  Phone: <%= "#{@message.phone}" %>
+<% end %>
+Link To Product: <%= "#{@message.url}" %>
+
+Message:
+<%= "#{@message.note}" %>
