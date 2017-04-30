@@ -1,4 +1,8 @@
-<div class="cart-background">
+<% if @order_items.size == 0 %>
+  <div class="cart-background">
+<% else %>
+  <div class="cart-background2">
+<% end %>
   <% if !@order_item.nil? && @order_item.errors.any? %>
     <div class="alert alert-danger">
       <ul>
@@ -21,6 +25,9 @@
       <div class="row" style="margin-right: 0px;">
         <div class="col-xs-6 pull-right well cart-grand-total">
           <div class="col-xs-6" style="text-align:center;">
+            <% if !current_user %>
+              <%= link_to "Checkout", guest_path, class: 'btn btn-primary', style: "margin-top:3em;" %>
+            <% end %>
             <%= form_tag("/pay", method: "post") do %>
               <article>
                 <% if flash[:error].present? %>
@@ -29,22 +36,43 @@
                   </div>
                 <% end %>
               </article>
-              <div style="margin-top:3em;">
-                <script
-                  src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                  data-amount='<%= @order.total*100 %>'
-                  data-name="Courier USA"
-                  data-description="Pay Your Shipping Charge"
-                  data-image="<%= image_path('package-icon.png') %>"
-                  data-locale="auto"
-                  data-allow-remember-me="false"
-                  data-billing-address="true"
-                  data-zip-code="true"
-                  data-shipping-address="true"
-                  data-label="Checkout">
-                </script>
-              </div>
+
+              <% if !current_user %>
+                <div style="margin-top:3em;display:none;">
+                  <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-amount='<%= @order.total*100 %>'
+                    data-name="Courier USA"
+                    data-description="Pay Your Shipping Charge"
+                    data-image="<%= image_path('package-icon.png') %>"
+                    data-locale="auto"
+                    data-allow-remember-me="false"
+                    data-billing-address="true"
+                    data-zip-code="true"
+                    data-shipping-address="true"
+                    data-label="Checkout">
+                  </script>
+                </div>
+              <% else %>
+                <div style="margin-top:3em;">
+                  <script
+                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                    data-amount='<%= @order.total*100 %>'
+                    data-name="Courier USA"
+                    data-description="Pay Your Shipping Charge"
+                    data-image="<%= image_path('package-icon.png') %>"
+                    data-locale="auto"
+                    data-allow-remember-me="false"
+                    data-billing-address="true"
+                    data-zip-code="true"
+                    data-shipping-address="true"
+                    data-label="Checkout">
+                  </script>
+                </div>
+              <% end %>
+
             <% end %>
           </div>
           <div class="col-xs-6 text-right">

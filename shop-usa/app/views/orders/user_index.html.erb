@@ -1,63 +1,71 @@
-<div class="container index">
-  
-  <script>
-    $(document).ready(function() {
-      $('#table-user').dataTable();
-    });
-  </script>
-  
+<% if current_user.orders.length == 0 %>
+  <div class="myorders-background">
+<% else %>
+  <div class="myorders-background2">
+<% end %>
+
   <% if current_user %>
-    <h1 class="user-title">My Orders</h1>
-    <table class="table table-hover table-background" id="table-user">
-      <thead>
-        <tr>
-          <th>Order ID</th>
-          <th>Description</th>
-          <th>Shipping Charge</th>
-          <th>Track Package</th>
-          <th>Paid?</th>
-          <th>Pay Charge</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @myorders.each do |order| %>
-          <tr>
-            <td><%= order.id %></td>
-            <td><%= order.description %></td>
-            <td><%= number_to_currency(order.shipping_charge) %></td>
-            <td><%= order.track_package %></td>
-            <td><strong><%= human_boolean(order.paid) %></strong></td>
-            <% if order.paid === false %>
-              <td>
-                <%= form_tag("/pay/" + "#{order.id}", method: "post") do %>
-                  <article>
-                    <% if flash[:error].present? %>
-                      <div id="error_explanation">
-                        <p><%= flash[:error] %></p>
-                      </div>
-                    <% end %>
-                  </article>
-                  
-                  <script
-                    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                    data-amount='<%= order.shipping_charge*100 %>'
-                    data-name="Shop Courier USA"
-                    data-description="Pay Your Shipping Charge"
-                    data-image="<%= image_path('package-icon.png') %>"
-                    data-locale="auto"
-                    data-allow-remember-me="false">
-                  </script>
-                <% end %>
-              </td>
-            <% else %>
-              <td></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+
+    <h1 class="text-center">My Orders</h1>
+    <hr class="my-orders-hr">
+    <% if @myorders.length == 0 %>
+      <div style="text-align:center">
+        <p class="text-center no-orders-msg">No Order History</p>
+        <%= link_to "Shop Now!", products_path, class: 'btn btn-lg btn-cart' %>
+      </div>
+    <% else %>
+      <% @myorders.each do |order| %>
+      <div class="well history-item">
+        <div class="row">
+          <div class="col-md-9">
+              <% order.order_items.each do |oi| %>
+                <div class="row avoid-stacking">
+                  <div class="col-xs-2">
+                    <div class="row">
+                      <h3 class="text-right"><%= oi.product.name %></h3>
+                    </div>
+                    <div class="row">
+                      <h5 class="text-right"><%= number_to_currency(oi.unit_price)%> ea.</h5>
+                    </div>
+                  </div>
+                  <div class="col-xs-3">
+                    <%= image_tag oi.product.photo, class: "thumbnail-cart" %>
+                  </div>
+                  <div class="col-xs-7 text-left">
+                    <div class="row">
+                      <h5><strong>Quantity Purchased: </strong><%= oi.quantity %></h5>
+                    </div>
+                    <div class="row">
+                      <h5><strong>Track Shipping: </strong><%= order.track_package %></h5>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+          </div>
+
+          <div class="col-md-3 text-center">
+              <div class="row">
+                <h2>Order #<%= order.id %></h2>
+              </div>
+              <div class="row">
+                <h5><%= order.created_at.strftime("%B %d, %Y") %></h5>
+              </div>
+              <div class="row">
+                <h5>Grand Total: <strong><%= number_to_currency(order.total) %></strong></h5>
+              </div>
+              <div class="row">
+                <%= mail_to 'orders@courierusallc.com', 'Help', subject: "Question About Order ##{order.id}", class: 'btn btn-cart' %>
+              </div>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    <% end %>
+
   <% else %>
     <p class="admin-access">You are not authorized to view this page!</p>
   <% end %>
+
 </div>
+
+<%= render 'layouts/footer' %>

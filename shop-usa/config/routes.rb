@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => {:registrations => 'registrations'}
   resources :orders
   resources :products, only: [:index, :create]
   resource :cart, only: [:show]
@@ -15,5 +15,6 @@ Rails.application.routes.draw do
 
   get '/how-it-works', to: 'home#how_it_works'
   get '/enterprise', to: 'home#enterprise'
+  get '/guest', to: 'home#guest'
 
 end

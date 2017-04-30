@@ -79,9 +79,11 @@ class OrderItemsController < ApplicationController
       ProductInquiryMailer.new_product_order(@message).deliver_now
       @order.update_attribute(:paid, true)
       @order.update_attribute(:track_package, 'Check back soon for package tracking information!')
+      @order.update_attribute(:user_id, current_user.id) unless !current_user
       session[:order_id] = nil
-      flash[:notice] = "You successfully paid your shipping charge! Check back soon for shipping information."
-      redirect_to cart_path
+      redirect_to cart_path if !current_user
+      redirect_to myorders_path if current_user
+      flash[:notice] = "Success, your receipt will be emailed shortly!"
     end
   rescue Stripe::CardError => e
     error = e.message

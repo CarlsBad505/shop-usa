@@ -1,0 +1,32 @@
+<div class="guest-background">
+  <div class="col-md-6 text-center">
+    <i class="fa fa-user-plus fa-5x" aria-hidden="true"></i>
+    <h2>Sign Up</h2>
+    <hr class="hiws-hr">
+    <p>Sign up to track your order history and view your account settings! In addition to an emailed receipt, we'll keep a log of
+      all your transactions.</p>
+    <br>
+    <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-cart' %>
+  </div>
+  <div class="col-md-6">
+    <div class="col-md-1">
+      <div class="vertical-line"></div>
+    </div>
+    <div class="col-md-11 text-center">
+      <i class="fa fa-user-secret fa-5x" aria-hidden="true"></i>
+      <h2>Continue As Guest</h2>
+      <hr class="hiws-hr">
+      <p>Don't feel like creating a user account? No problem, feel free to continue as a guest and we'll email you a receipt!</p>
+      <br>
+      <%= link_to "Continue As Guest", cart_path, class: 'btn btn-cart', id: 'pay-now' %>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $('#pay-now').click(function() {
+    setTimeout(function() {
+      $(".stripe-button-el").click();
+    }, 500);
+  });
+</script>

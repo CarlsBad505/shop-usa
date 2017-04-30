@@ -44,6 +44,14 @@ $background-color: #E8E8E8;
   height: 100vh;
 }
 
+.cart-background2 {
+  background-image: url(<%= image_path 'empty-cart' %>);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+}
+
 .empty-actions-msg {
   color: #fff;
   font-size: 1.5em;
@@ -61,4 +69,15 @@ $background-color: #E8E8E8;
   background-color: #9d9d9d !important;
   color: white !important;
   border: .15em solid black !important;
+}
+
+.btn-remove {
+  background-color: #d9534f;
+  color: black;
+}
+
+.btn-remove:hover {
+  background-color: #d9534f;
+  color: black;
+  border: .15em solid black;
 }

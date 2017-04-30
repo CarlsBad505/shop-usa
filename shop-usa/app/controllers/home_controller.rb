@@ -22,6 +22,9 @@ class HomeController < ApplicationController
     end
   end
 
+  def guest
+  end
+
   private
 
   def message_params

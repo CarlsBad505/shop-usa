@@ -22,21 +22,27 @@ Product.create!(
     id: 1,
     name: "Camera",
     price: 89.99,
-    active: true
+    active: true,
+    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/SUP.png",
+    description: "This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 )
 
 Product.create!(
     id: 2,
     name: "iPhone 7",
     price: 299.99,
-    active: true
+    active: true,
+    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/SUP.png",
+    description: "This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 )
 
 Product.create!(
     id: 3,
     name: "Samsung Smart Watch",
     price: 250.49,
-    active: true
+    active: true,
+    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/SUP.png",
+    description: "This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
 )
 
 OrderStatus.create! id: 1, name: "In Progress"

@@ -4,11 +4,12 @@ class OrdersController < ApplicationController
   # Use this method to display orders on the Admin Page
   def index
     @orders = Order.all
+    @products = ""
   end
 
   # Use this method to display orders who belong to a specific user
   def user_index
-    @myorders = current_user.orders
+    @myorders = current_user.orders.where(paid: true)
   end
 
   def show

@@ -1,6 +1,7 @@
 class ProductInquiryMailer < ApplicationMailer
   default from: "noreply@courierusallc.com"
   # default to: "peter.sidles@courierusallc.com"
+  # default to: "orders@courierusallc.com"
   default to: "carl@tabrific.com"
 
   def new_product_inquiry(message)

@@ -39,26 +39,20 @@
                 <%= f.hidden_field(:product_id, value: product.id) %>
                 <div class="col-sm-4 col-lg-4 col-md-4">
                   <div class="thumbnail">
-                    <%= image_tag 'SUP.png' %>
+                    <%= image_tag product.photo %>
                     <div class="caption">
                       <h4 class="pull-right">$<%= product.price %></h4>
                       <!-- If this link below goes to a third party... then need to make it open in a new tab -->
                       <h4><%= product.name %></h4>
-                      <p>This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      <div class="row">
-                        <div class="col-md-4">
-                          <%= f.button '<i class="fa fa-shopping-cart" aria-hidden="true"></i> Add'.html_safe, class: 'add-cart' %>
-                        </div>
-                        <div class="col-md-2">
-
-                        </div>
-                        <div class="form-group">
-                          <%= f.number_field :quantity, value: 1, class: 'product-qty' %>
-                        </div>
-                      </div>
+                      <p><%= product.description %></p>
                       <div class="row">
                         <div class="col-md-6">
-                          <h6><a href="#" class="btn btn-primary btn-sm btn-cart">View Vendor</a></h6>
+                          <%= f.button '<i class="fa fa-shopping-cart" aria-hidden="true"></i> Add'.html_safe, class: 'add-cart' %>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group align-center">
+                            Qty: <%= f.number_field :quantity, value: 1, class: 'product-qty' %>
+                          </div>
                         </div>
                       </div>
                     </div>

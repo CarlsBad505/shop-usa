@@ -1,44 +1,51 @@
-<div class="container index">
-  
-   <script>
-     $(document).ready(function() {
-       $('#table-admin').dataTable();
-     });
-   </script>
-  
-  <% if current_user.admin? %>
-    <h1 class="admin-title">Administrative Panel</h1>
-    <p class="admin-instructions">*To create a new user, logout and go to this link:</p>
-    <p class="admin-instructions"><strong>http://www.shopcourierusallc.com/users/sign_up</strong></p>
-    <div class="admin-create">
-      <%= link_to '+ Create New Order', new_order_path, class: 'btn btn-success btn-lg' %>
-    </div>
-    <br />
-    <table class="table table-hover table-background" id="table-admin">
-      <thead>
-        <tr>
-          <th>Order ID</th>
-          <th>Description</th>
-          <th>Shipping Charge</th>
-          <th>Track Package</th>
-          <th>Paid?</th>
-          <th>Edit Order</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @orders.each do |order| %>
+<div class="myorders-background2" style="color:white;">
+
+   <div class="container">
+     <% if current_user.admin? %>
+      <h1 class="admin-title">Administrative Panel</h1>
+      <p class="admin-instructions">*To create a new user, logout and go to this link:</p>
+      <p class="admin-instructions"><strong>http://www.shopcourierusallc.com/users/sign_up</strong></p>
+      <div class="admin-create">
+        <%= link_to '+ Create New Order', new_order_path, class: 'btn btn-success btn-lg' %>
+      </div>
+      <br />
+      <table class="table table-hover table-background" id="table-admin" style="color:black;">
+        <thead>
           <tr>
-            <td><%= order.id %></td>
-            <td><%= order.description %></td>
-            <td><%= number_to_currency(order.shipping_charge) %></td>
-            <td><%= order.track_package %></td>
-            <td><strong><%= human_boolean(order.paid) %></strong></td>
-            <td><%= link_to "Edit", edit_order_path(order), class: 'btn btn-primary btn-sm' %></td>
+            <th>Order ID</th>
+            <th>Description</th>
+            <th>Shipping Charge</th>
+            <th>Track Package</th>
+            <th>Paid?</th>
+            <th>Edit Order</th>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  <% else %>
-    <p class="admin-access">You are not authorized to view this page!</p>
-  <% end %>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td><%= order.id %></td>
+              <% order.order_items.each do |oi| %>
+                <% @products += "#{oi.product.name}, " %>
+              <% end %>
+              <td><%= @products %></td>
+              <td><%= order.shipping_charge ? number_to_currency(order.shipping_charge) : number_to_currency(0) %></td>
+              <td><%= order.track_package %></td>
+              <td><strong><%= human_boolean(order.paid) %></strong></td>
+              <td><%= link_to "Edit", edit_order_path(order), class: 'btn btn-primary btn-sm' %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p class="admin-access">You are not authorized to view this page!</p>
+    <% end %>
+  </div>
 </div>
+
+<%= render 'layouts/footer' %>
+
+<script>
+  $(document).ready(function() {
+    $('#table-admin').dataTable();
+  });
+</script>
