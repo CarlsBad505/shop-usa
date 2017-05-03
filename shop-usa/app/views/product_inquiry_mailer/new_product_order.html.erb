@@ -1,17 +1,30 @@
 <div class="">
   <p><strong>Hey Courier USA, you have a new product order!</strong></p>
   <p><strong>Order #<%=@message[:order_number] %></strong></p>
+  <% if @message[:guest] %>
+    <p>Guest Purchase: <%= @message[:guest] %></p>
+  <% end %>
 </div>
 
 <div class="">
   <p><strong>Order Details:</strong></p>
-  <% @message[:order_items].each do |oi| %>
-    <strong><%= oi.product.name %></strong>
+  <% if @message[:description] %>
     <ul>
-      <li>Price Paid: <%= number_to_currency(oi.product.price) %></li>
-      <li>Quantity: <%= oi.quantity %></li>
+      <li>Custom Product Description: <%= @message[:description] %></li>
+      <li>Shipping Cost: <%= number_to_currency(@message[:shipping_amount]) %></li>
+      <li>Item Price: <%= number_to_currency(@message[:item_amount]) %></li>
+      <li>Total Price: <%= number_to_currency(@message[:total_amount]) %></li>
     </ul>
-    <br>
+  <% elsif @message[:order_items] %>
+    <% @message[:order_items].each do |oi| %>
+      <strong><%= oi.product.name %></strong>
+      <ul>
+        <li>Price Paid: <%= number_to_currency(oi.product.price) %> .ea</li>
+        <li>Shipping Paid: <%= number_to_currency(oi.product.shipping) %> .ea</li>
+        <li>Quantity: <%= oi.quantity %></li>
+      </ul>
+      <br>
+    <% end %>
   <% end %>
 </div>
 

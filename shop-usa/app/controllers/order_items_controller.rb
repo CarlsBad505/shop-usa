@@ -38,6 +38,11 @@ class OrderItemsController < ApplicationController
   def pay
     @order = current_order
     amount = @order.total.round*100
+    shipping_charge = 0
+    @order.order_items.each do |oi|
+      shipping_charge += oi.product.shipping
+    end
+    grand_total = amount + shipping_charge.round*100
     description = "Order From Courier USA LLC"
 
     customer = Stripe::Customer.create(
@@ -47,7 +52,7 @@ class OrderItemsController < ApplicationController
 
     charge = Stripe::Charge.create(
       customer:       customer.id,
-      amount:         amount,
+      amount:         grand_total,
       description:    description,
       currency:       'usd',
       receipt_email:  customer.email,
@@ -72,7 +77,8 @@ class OrderItemsController < ApplicationController
         shipping_zip: params[:stripeShippingAddressZip],
         shipping_country: params[:stripeShippingAddressCountry],
         order_number: @order.id,
-        order_items: @order.order_items
+        order_items: @order.order_items,
+        guest: current_user ? "No" : "Yes"
     }
 
     if charge

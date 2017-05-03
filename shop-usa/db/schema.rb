@@ -40,8 +40,8 @@ ActiveRecord::Schema.define(version: 20170429221459) do
     t.boolean  "paid",                                     default: false
     t.decimal  "subtotal",        precision: 12, scale: 2
     t.decimal  "tax",             precision: 12, scale: 2
-    t.decimal  "shipping",        precision: 12, scale: 2
     t.decimal  "total",           precision: 12, scale: 2
+    t.boolean  "custom",                                   default: false
     t.integer  "order_status_id"
     t.index ["order_status_id"], name: "index_orders_on_order_status_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -62,6 +62,8 @@ ActiveRecord::Schema.define(version: 20170429221459) do
     t.datetime "updated_at",                                   null: false
     t.string   "photo"
     t.text     "description"
+    t.decimal  "shipping",            precision: 12, scale: 2
+    t.decimal  "tax",                 precision: 12, scale: 2
     t.index ["product_category_id"], name: "index_products_on_product_category_id"
   end
 

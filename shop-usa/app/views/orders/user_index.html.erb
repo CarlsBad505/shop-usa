@@ -5,63 +5,127 @@
 <% end %>
 
   <% if current_user %>
-
-    <h1 class="text-center">My Orders</h1>
-    <hr class="my-orders-hr">
-    <% if @myorders.length == 0 %>
-      <div style="text-align:center">
-        <p class="text-center no-orders-msg">No Order History</p>
-        <%= link_to "Shop Now!", products_path, class: 'btn btn-lg btn-cart' %>
-      </div>
-    <% else %>
-      <% @myorders.each do |order| %>
-      <div class="well history-item">
-        <div class="row">
-          <div class="col-md-9">
-              <% order.order_items.each do |oi| %>
-                <div class="row avoid-stacking">
-                  <div class="col-xs-2">
-                    <div class="row">
-                      <h3 class="text-right"><%= oi.product.name %></h3>
-                    </div>
-                    <div class="row">
-                      <h5 class="text-right"><%= number_to_currency(oi.unit_price)%> ea.</h5>
-                    </div>
-                  </div>
-                  <div class="col-xs-3">
-                    <%= image_tag oi.product.photo, class: "thumbnail-cart" %>
-                  </div>
-                  <div class="col-xs-7 text-left">
-                    <div class="row">
-                      <h5><strong>Quantity Purchased: </strong><%= oi.quantity %></h5>
-                    </div>
-                    <div class="row">
-                      <h5><strong>Track Shipping: </strong><%= order.track_package %></h5>
-                    </div>
-                  </div>
-                </div>
-              <% end %>
-          </div>
-
-          <div class="col-md-3 text-center">
-              <div class="row">
-                <h2>Order #<%= order.id %></h2>
-              </div>
-              <div class="row">
-                <h5><%= order.created_at.strftime("%B %d, %Y") %></h5>
-              </div>
-              <div class="row">
-                <h5>Grand Total: <strong><%= number_to_currency(order.total) %></strong></h5>
-              </div>
-              <div class="row">
-                <%= mail_to 'orders@courierusallc.com', 'Help', subject: "Question About Order ##{order.id}", class: 'btn btn-cart' %>
-              </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-center">
+          <h1 style="color:#E8E8E8;font-weight:bold;">My Orders</h1>
+          <hr class="my-orders-hr">
+          <% if @myorders.length == 0 %>
+            <div style="text-align:center">
+              <p class="text-center no-orders-msg">No Order History</p>
+              <%= link_to "Shop Now!", products_path, class: 'btn btn-lg btn-cart' %>
+            </div>
+          <% end %>
+        </div>
+        <div class="col-md-6 pull-left">
+          <div class="list-group inquiry-custom1">
+            <div class="list-group-item inquiry-custom2">
+              <i class="fa fa-binoculars fa-5x" aria-hidden="true"></i>
+              <p class="">If you submitted custom inquiries, see the estimated cost of your items now!</p>
+              <%= link_to "My Custom Inquiries", custom_inquiry_path, class: 'btn btn-cart'%>
+            </div>
           </div>
         </div>
       </div>
-      <% end %>
-    <% end %>
+    </div>
+      <% @myorders.each do |order| %>
+      <% @custom_description = order.description %>
+      <% custom_price = order.total %>
+      <div class="well history-item">
+        <div class="row">
+          <% if order.order_items.length > 0 %>
+            <div class="col-md-9">
+                <% order.order_items.each do |oi| %>
+                  <div class="row avoid-stacking">
+                    <div class="col-xs-2">
+                      <div class="row">
+                        <h3 class="text-right"><%= oi.product.name %></h3>
+                      </div>
+                      <div class="row">
+                        <h5 class="text-right"><%= number_to_currency(oi.unit_price)%> ea.</h5>
+                      </div>
+                    </div>
+                    <div class="col-xs-3">
+                      <%= image_tag oi.product.photo, class: "thumbnail-cart" %>
+                    </div>
+                    <div class="col-xs-7 text-left">
+                      <div class="row">
+                        <h5><strong>Quantity Purchased: </strong><%= oi.quantity %></h5>
+                      </div>
+                      <div class="row">
+                        <h5><strong>Track Shipping: </strong><%= order.track_package.include?("Check back soon") ? order.track_package : link_to("Track Package", order.track_package, target: :_blank) %></h5>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+            </div>
+          <% elsif order.description != nil %>
+            <div class="col-md-9">
+              <div class="row avoid-stacking">
+                <div class="col-xs-2">
+                  <div class="row">
+                    <h3 class="text-right"><%= order.description %></h3>
+                  </div>
+                  <div class="row">
+                    <h5 class="text-right"><%= number_to_currency(order.total)%> ea.</h5>
+                  </div>
+                </div>
+                <div class="col-xs-3">
+                  <%= image_tag "https://s3-us-west-2.amazonaws.com/shop-usa/custom-order.jpg", class: "thumbnail-cart" %>
+                </div>
+                <div class="col-xs-7 text-left">
+                  <div class="row">
+                    <h5><strong>Track Shipping: </strong><%= order.track_package.include?("Check back soon") ? order.track_package : link_to("Track Package", order.track_package, target: :_blank) %></h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
 
+          <% if order.order_items.length > 0 %>
+            <div class="col-md-3 text-center">
+                <div class="row">
+                  <h2>Order #<%= order.id %></h2>
+                </div>
+                <div class="row">
+                  <h5><%= order.created_at.strftime("%B %d, %Y") %></h5>
+                </div>
+                <div class="row">
+                  <% shipping = 0 %>
+                  <% order.order_items.each do |oi| %>
+                    <% shipping += oi.product.shipping %>
+                  <% end %>
+                  <h5>Shipping: <strong><%= number_to_currency(shipping) %></strong></h5>
+                </div>
+                <div class="row">
+                  <h5>Grand Total: <strong><%= number_to_currency(order.total + shipping) %></strong></h5>
+                </div>
+                <div class="row">
+                  <%= mail_to 'orders@courierusallc.com', 'Help', subject: "Question About Order ##{order.id}", class: 'btn btn-cart' %>
+                </div>
+            </div>
+          <% elsif order.description != nil %>
+            <div class="col-md-3 text-center">
+                <div class="row">
+                  <h2>Order #<%= order.id %></h2>
+                </div>
+                <div class="row">
+                  <h5><%= order.created_at.strftime("%B %d, %Y") %></h5>
+                </div>
+                <div class="row">
+                  <h5>Shipping: <strong><%= number_to_currency(order.shipping_charge) %></strong></h5>
+                </div>
+                <div class="row">
+                  <h5>Grand Total: <strong><%= number_to_currency(order.total + order.shipping_charge ) %></strong></h5>
+                </div>
+                <div class="row">
+                  <%= mail_to 'orders@courierusallc.com', 'Help', subject: "Question About Order ##{order.id}", class: 'btn btn-cart' %>
+                </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
   <% else %>
     <p class="admin-access">You are not authorized to view this page!</p>
   <% end %>

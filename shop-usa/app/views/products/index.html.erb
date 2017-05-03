@@ -8,17 +8,16 @@
   <div class="container">
     <div class="row products-gallery">
       <div class="col-md-3">
-        <div class="list-group">
+        <!-- <div class="list-group">
           <a href="#" class="list-group-item">Category 1</a>
           <a href="#" class="list-group-item">Category 2</a>
           <a href="#" class="list-group-item">Category 3</a>
-        </div>
+        </div> -->
         <div class="list-group">
           <div class="list-group-item">
             <i class="fa fa-comments-o fa-5x" aria-hidden="true"></i>
             <p class="">Don't see what you need? Tell us what you're looking for and get a free shipping estimate now!</p>
             <a class="page-scroll btn btn-primary btn-cart btn-slider" href="#custom-inquiry">Estimate Now</a>
-            <%#= link_to "Estimate Now", enterprise_path, class: 'btn btn-primary btn-cart btn-slider' %>
           </div>
         </div>
         <div class="list-group">
@@ -38,11 +37,10 @@
                 <%= form_for @order_item, remote: true do |f| %>
                 <%= f.hidden_field(:product_id, value: product.id) %>
                 <div class="col-sm-4 col-lg-4 col-md-4">
-                  <div class="thumbnail">
+                  <div class="thumbnail thumbnail-product">
                     <%= image_tag product.photo %>
                     <div class="caption">
-                      <h4 class="pull-right">$<%= product.price %></h4>
-                      <!-- If this link below goes to a third party... then need to make it open in a new tab -->
+                      <h4 class="pull-right"><%= number_to_currency(product.price) %></h4>
                       <h4><%= product.name %></h4>
                       <p><%= product.description %></p>
                       <div class="row">

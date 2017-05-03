@@ -1,30 +1,37 @@
 <div class="container">
 
 <% if current_user.admin? %>
-  <h1>Create A New Order</h1>
+  <h1>Create A New Order For Custom Inquiry</h1>
   <p class="require">*required</p>
-  
+
   <%= form_for @order do |f| %>
+    <%= f.hidden_field :custom, value: true %>
+
     <div class="form-group">
       <%= f.label 'Enter User Email*' %>
       <%= f.email_field :user_id, autofocus: true, class: "form-control" %>
     </div>
-    
+
     <div class="form-group">
       <%= f.label 'Description*' %>
       <%= f.text_field :description, autofocus: false, class: "form-control" %>
     </div>
-    
+
+    <div class="form-group">
+      <%= f.label 'Item Price*' %>
+      <%= f.number_field :total, autofocus: false, class: "form-control", value: number_with_precision(@order.shipping_charge, precision: 2), step: '0.01' %>
+    </div>
+
     <div class="form-group">
       <%= f.label 'Shipping Charge*' %>
       <%= f.number_field :shipping_charge, autofocus: false, class: "form-control", value: number_with_precision(@order.shipping_charge, precision: 2), step: '0.01' %>
     </div>
-    
+
      <div class="form-group">
       <%= f.label 'Track Package' %>
       <%= f.url_field :track_package, autofocus: false, class: "form-control" %>
     </div>
-    
+
      <div class="form-group">
       <%= f.submit "Create New Order!", class: "btn btn-success" %>
      </div>
@@ -33,4 +40,3 @@
   <p class="admin-access">You are not authorized to view this page!</p>
 <% end %>
 </div>
-

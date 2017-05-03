@@ -20,29 +20,52 @@ User.create!(
 
 Product.create!(
     id: 1,
-    name: "Camera",
-    price: 89.99,
+    name: "Google Home",
+    price: 114,
     active: true,
-    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/SUP.png",
-    description: "This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/Google-Home.jpeg",
+    description: "Ask it questions. Tell it to do things. It's your own Google, always ready to help. Just start by saying, \'Ok Google.\'",
+    shipping: 118
 )
 
 Product.create!(
     id: 2,
-    name: "iPhone 7",
-    price: 299.99,
+    name: "Dell Inspiron i3552",
+    price: 259,
     active: true,
-    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/SUP.png",
-    description: "This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/Dell-Inspiron-Laptop.jpeg",
+    description: "Intel Celeron N3050 Processor, 4GB memory, 500GB hard drive, 15.6\" display, Memory Card Reader, WiFi",
+    shipping: 202
 )
 
 Product.create!(
     id: 3,
-    name: "Samsung Smart Watch",
-    price: 250.49,
+    name: "Due Menti Sydney Collection - Giselle",
+    price: 78,
     active: true,
-    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/SUP.png",
-    description: "This is a short description. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/Due-Menti.jpeg",
+    description: "Beaded wrap bracelet with gold and blue accents, brass accent bead detail. Can be worn as a necklace. Length: approximately 26” with a 2” chain extension/6.5” wrapped",
+    shipping: 113
+)
+
+Product.create!(
+    id: 4,
+    name: "Arbonne Skin Care",
+    price: 72,
+    active: true,
+    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/RE9-Advanced-Restorative.jpg",
+    description: "NEW! RE9 Advanced Restorative Cream SPF 20 Sunscreen",
+    shipping: 111
+)
+
+Product.create!(
+    id: 5,
+    name: "Spalding Basketball",
+    price: 39,
+    active: true,
+    photo: "https://s3-us-west-2.amazonaws.com/shop-usa/Spalding-Basketball.jpeg",
+    description: "Spalding Indoor / Outdoor Basketball",
+    shipping: 113
 )
 
 OrderStatus.create! id: 1, name: "In Progress"
@@ -50,25 +73,6 @@ OrderStatus.create! id: 2, name: "Placed"
 OrderStatus.create! id: 3, name: "Shipped"
 OrderStatus.create! id: 4, name: "Cancelled"
 
-# users = User.all
-
-# 20.times do
-#   Order.create!(
-#     description: Faker::Lorem.sentence(word_count = 6),
-#     shipping_charge: Faker::Number.number(3),
-#     track_package: Faker::Internet.url,
-#     user: users.sample
-#   )
-# end
-
-# 5.times do
-#   Order.create!(
-#     description: Faker::Lorem.sentence(word_count = 6),
-#     shipping_charge: Faker::Number.number(3),
-#     track_package: Faker::Internet.url,
-#     user: User.last
-#   )
-# end
 
 puts "Seed Finished"
 puts "#{User.count} users created"

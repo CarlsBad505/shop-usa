@@ -1,0 +1,63 @@
+<% if @custom_orders.length == 0 %>
+  <div class="myorders-background">
+<% else %>
+  <div class="myorders-background2">
+<% end %>
+
+  <div class="container">
+    <div class="col-md-12">
+      <% if @custom_orders.length == 0 %>
+        <div style="text-align:center">
+          <p class="text-center no-orders-msg" style="color:white;">No Custom Inquiries</p>
+          <p style="color:white;">Can't find what you need? No problem, send us an inquiry and we'll help source it for you.</p>
+          <%= link_to "Inquire Now!", products_path, class: 'btn btn-lg btn-cart' %>
+        </div>
+      <% else %>
+        <div class="row">
+          <% @custom_orders.each do |co| %>
+            <div class="col-sm-4 col-lg-4 col-md-4">
+              <div class="thumbnail thumbnail-product">
+                <%= image_tag 'https://s3-us-west-2.amazonaws.com/shop-usa/custom-order.jpg' %>
+                <div class="caption">
+                  <p><strong>Item: </strong><%= co.description %></p>
+                  <p><strong>Shipping: </strong><%= number_to_currency(co.shipping_charge) %></p>
+                  <p><strong>Price: </strong><%= number_to_currency(co.total) %></p>
+                  <% grand_total = co.shipping_charge + co.total %>
+                  <p style="color:#009688;"><strong>Total Price: <%= number_to_currency(grand_total) %></strong></p>
+                  <%= form_tag("/pay/" + "#{co.id}", method: "post") do %>
+                    <article>
+                      <% if flash[:error].present? %>
+                        <div id="error_explanation">
+                          <p><%= flash[:error] %></p>
+                        </div>
+                      <% end %>
+                    </article>
+                    <div>
+                      <script
+                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                        data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                        data-amount='<%= grand_total*100 %>'
+                        data-name="Courier USA"
+                        data-description="Enter Payment Information"
+                        data-image="<%= image_path('package-icon.png') %>"
+                        data-locale="auto"
+                        data-allow-remember-me="false"
+                        data-billing-address="true"
+                        data-zip-code="true"
+                        data-shipping-address="true"
+                        data-label="Pay">
+                      </script>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+<%= render 'layouts/footer' %>

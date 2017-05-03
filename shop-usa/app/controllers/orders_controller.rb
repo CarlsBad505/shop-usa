@@ -4,7 +4,10 @@ class OrdersController < ApplicationController
   # Use this method to display orders on the Admin Page
   def index
     @orders = Order.all
-    @products = ""
+  end
+
+  def custom_inquiry
+    @custom_orders = Order.all.where(custom: true).where(paid: false)
   end
 
   # Use this method to display orders who belong to a specific user
@@ -67,7 +70,9 @@ class OrdersController < ApplicationController
 
   def pay
     @order = Order.find(params[:id])
-    amount = @order.shipping_charge.round*100
+    shipping_amount = @order.shipping_charge.round*100
+    item_amount = @order.total.round*100
+    total_amount = shipping_amount + item_amount
     description = @order.description
 
     customer = Stripe::Customer.create(
@@ -77,16 +82,43 @@ class OrdersController < ApplicationController
 
     charge = Stripe::Charge.create(
       :customer    => customer.id,
-      :amount      => amount,
+      :amount      => total_amount,
       :description => description,
-      :currency    => 'usd'
+      :currency    => 'usd',
+      receipt_email:  customer.email,
+      shipping:       {
+        name: params[:stripeShippingName],
+        address: {
+          line1: params[:stripeShippingAddressLine1],
+          city:  params[:stripeShippingAddressCity],
+          state: params[:stripeShippingAddressState],
+          postal_code: params[:stripeShippingAddressZip],
+          country: params[:stripeShippingAddressCountry]
+        }
+      }
     )
 
+    @message = {
+      name: params[:stripeShippingName],
+      email: customer.email,
+      shipping_line1: params[:stripeShippingAddressLine1],
+      shipping_city: params[:stripeShippingAddressCity],
+      shipping_state: params[:stripeShippingAddressState],
+      shipping_zip: params[:stripeShippingAddressZip],
+      shipping_country: params[:stripeShippingAddressCountry],
+      order_number: @order.id,
+      description: @order.description,
+      shipping_amount: @order.shipping_charge,
+      item_amount: @order.total,
+      total_amount: @order.total + @order.shipping_charge
+    }
+
     if charge
+      ProductInquiryMailer.new_product_order(@message).deliver_now
       @order.update_attribute(:paid, true)
       @order.update_attribute(:track_package, 'Check back soon for package tracking information!')
-      flash[:notice] = "You successfully paid your shipping charge! Check back soon for shipping information."
       redirect_to myorders_path
+      flash[:notice] = "Success, your receipt will be emailed shortly!"
     end
   rescue Stripe::CardError => e
     flash[:error] = e.message
@@ -102,6 +134,6 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:description, :shipping_charge, :track_package, :user_id)
+    params.require(:order).permit(:description, :shipping_charge, :track_package, :user_id, :custom, :total)
   end
 end

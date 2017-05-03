@@ -1,6 +1,11 @@
 $primary-color: #FED100;
 $background-color: #E8E8E8;
 
+.shipping-days {
+  font-style: italic;
+  font-size: .8em;
+}
+
 .cart-item {
   background-color: rgba(232,232,232,0.7) !important;
 }
@@ -37,7 +42,7 @@ $background-color: #E8E8E8;
 }
 
 .cart-background {
-  background-image: url(<%= image_path 'empty-cart' %>);
+  background-image: url(<%= image_path 'https://s3-us-west-2.amazonaws.com/shop-usa/empty-cart.png' %>);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -45,7 +50,7 @@ $background-color: #E8E8E8;
 }
 
 .cart-background2 {
-  background-image: url(<%= image_path 'empty-cart' %>);
+  background-image: url(<%= image_path 'https://s3-us-west-2.amazonaws.com/shop-usa/empty-cart.png' %>);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;

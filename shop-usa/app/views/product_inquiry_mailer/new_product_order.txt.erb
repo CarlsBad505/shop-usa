@@ -1,11 +1,21 @@
 Hey Courier USA, you have a new product order!
 Order #<%=@message[:order_number] %>
+<% if @message[:guest] %>
+  Guest Purchase: <%= @message[:guest] %>
+<% end %>
 
 Order Details:
-<% @message[:order_items].each do |oi| %>
-  Product Name: <%= oi.product.name %>
-  Price Paid: <%= number_to_currency(oi.product.price) %>
-  Quantity: <%= oi.quantity %>
+<% if @message[:description] %>
+  Custom Product Description: <%= @message[:description] %>
+  Shipping Cost: <%= number_to_currency(@message[:shipping_amount]) %>
+  Item Price: <%= number_to_currency(@message[:item_amount]) %>
+  Total Price: <%= number_to_currency(@message[:total_amount]) %>
+<% elsif @message[:order_items] %>
+  <% @message[:order_items].each do |oi| %>
+    <%= oi.product.name %>
+      Price Paid: <%= number_to_currency(oi.product.price) %>
+      Quantity: <%= oi.quantity %>
+  <% end %>
 <% end %>
 
 Shipping Details:

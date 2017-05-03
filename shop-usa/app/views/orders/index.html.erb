@@ -24,10 +24,15 @@
           <% @orders.each do |order| %>
             <tr>
               <td><%= order.id %></td>
+              <% @products = "" %>
               <% order.order_items.each do |oi| %>
                 <% @products += "#{oi.product.name}, " %>
               <% end %>
-              <td><%= @products %></td>
+              <% if order.custom %>
+                <td><%= order.description %></td>
+              <% else %>
+                <td><%= @products %></td>
+              <% end %>
               <td><%= order.shipping_charge ? number_to_currency(order.shipping_charge) : number_to_currency(0) %></td>
               <td><%= order.track_package %></td>
               <td><strong><%= human_boolean(order.paid) %></strong></td>

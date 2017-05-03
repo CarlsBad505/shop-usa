@@ -3,11 +3,67 @@
   <div class="Modern-Slider">
     <div class="item">
       <div class="img-fill">
-        <%= image_tag 'wood-background.jpg' %>
+        <%= image_tag 'https://s3-us-west-2.amazonaws.com/shop-usa/wood-background.jpg' %>
         <div class="info">
           <div>
-            <h3>Unique Product Offerings, Shipped & Tailored For You</h3>
+            <!-- <h3>Unique Product Offerings, Shipped & Tailored For You</h3> -->
+            <h3>Featured Products, Tailored For You</h3>
             <h5><%= link_to 'Browse Now', products_path, class: 'btn btn-primary btn-lg btn-cart' %></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img-fill">
+        <%= image_tag 'https://s3-us-west-2.amazonaws.com/shop-usa/Google-Home-Slider.jpeg' %>
+        <div class="info">
+          <div>
+            <h3>Google Home | $114</h3>
+            <h5><%= link_to 'Buy Now', products_path, class: 'btn btn-primary btn-lg btn-cart' %></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img-fill">
+        <%= image_tag 'https://s3-us-west-2.amazonaws.com/shop-usa/Dell-Inspiron-Laptop-Slider.jpeg' %>
+        <div class="info">
+          <div>
+            <h3>Dell Black 15.6" Inspiron i3552 | $259</h3>
+            <h5><%= link_to 'Buy Now', products_path, class: 'btn btn-primary btn-lg btn-cart' %></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img-fill">
+        <%= image_tag 'https://s3-us-west-2.amazonaws.com/shop-usa/Due-Menti-Slider.jpeg' %>
+        <div class="info">
+          <div>
+            <h3>Due Menti Sydney Collection - Giselle | $70</h3>
+            <h5><%= link_to 'Buy Now', products_path, class: 'btn btn-primary btn-lg btn-cart' %></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img-fill">
+        <%= image_tag 'https://s3-us-west-2.amazonaws.com/shop-usa/RE9-Advanced-Restorative-Slider.jpeg' %>
+        <div class="info">
+          <div>
+            <h3>Arbonne Skin Care | $66</h3>
+            <h5><%= link_to 'Buy Now', products_path, class: 'btn btn-primary btn-lg btn-cart' %></h5>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <div class="img-fill">
+        <%= image_tag 'https://s3-us-west-2.amazonaws.com/shop-usa/Spalding-Basketball-Slider.jpeg' %>
+        <div class="info">
+          <div>
+            <h3>Spalding Basketball | $29</h3>
+            <h5><%= link_to 'Buy Now', products_path, class: 'btn btn-primary btn-lg btn-cart' %></h5>
           </div>
         </div>
       </div>
@@ -17,13 +73,14 @@
         <%= image_tag 'https://s3-us-west-2.amazonaws.com/shop-usa/cover1.jpg' %>
         <div class="info">
           <div>
-            <h3>Stand Up Paddle Boards | $199</h3>
-            <h5><%= link_to 'Buy Now', products_path, class: 'btn btn-primary btn-lg btn-cart' %></h5>
+            <h3>Can't Find What You Need? Let Us Source It!</h3>
+            <h5><%= link_to 'Source Now', products_path, class: 'btn btn-primary btn-lg btn-cart' %></h5>
           </div>
         </div>
       </div>
     </div>
   </div>
+
 
   <section>
     <div class="container selling-points">
@@ -35,16 +92,16 @@
       <hr class="selling-hr">
       <div class="row">
         <div class="col-md-4">
-          <i class="fa fa-unlock fa-home fa-4x" aria-hidden="true"></i>
+          <i class="fa fa-unlock fa-homee fa-4x" aria-hidden="true"></i>
           <p class="selling-point header-fnt">Unlock American Brands and Products</p>
         </div>
         <div class="col-md-4">
-          <i class="fa fa-certificate fa-home fa-4x" aria-hidden="true"></i>
+          <i class="fa fa-certificate fa-homee fa-4x" aria-hidden="true"></i>
           <p class="selling-point-mid header-fnt">Trusted and Certified Vendors</p>
         </div>
         <div class="col-md-4">
-          <i class="fa fa-plane fa-home fa-4x" aria-hidden="true"></i>
-          <p class="selling-point header-fnt">Personalized US Shipping Address</p>
+          <i class="fa fa-search fa-homee fa-4x" aria-hidden="true"></i>
+          <p class="selling-point header-fnt">Inquire And Source Any Product</p>
         </div>
       </div>
     </div>
@@ -59,16 +116,16 @@
         <%= image_tag 'restorationhardware-logo.png', class: 'img-responsive logo-img' %>
       </div>
       <div class="col-md-2">
-        <%= image_tag 'target-logo.png', class: 'img-responsive logo-img' %>
+        <%= image_tag 'nike-logo.png', class: 'img-responsive logo-img' %>
       </div>
       <div class="col-md-2">
-        <%= image_tag 'restorationhardware-logo.png', class: 'img-responsive logo-img' %>
+        <%= image_tag 'amazon-logo.png', class: 'img-responsive logo-img' %>
       </div>
       <div class="col-md-2">
-        <%= image_tag 'target-logo.png', class: 'img-responsive logo-img' %>
+        <%= image_tag 'lowes-logo.png', class: 'img-responsive logo-img' %>
       </div>
       <div class="col-md-2">
-        <%= image_tag 'restorationhardware-logo.png', class: 'img-responsive logo-img' %>
+        <%= image_tag 'dell-logo.png', class: 'img-responsive logo-img' %>
       </div>
     </div>
   </aside>
@@ -77,7 +134,7 @@
     <div class="container enterprise">
       <div class="row">
         <div class="col-md-8">
-          <%= image_tag 'enterprise1.png', class: 'img-responsive img-rounded img-home-enterprise' %>
+          <%= image_tag 'https://s3-us-west-2.amazonaws.com/shop-usa/enterprise1.png', class: 'img-responsive img-rounded img-home-enterprise' %>
         </div>
         <div class="col-md-4">
           <h1 class='header-fnt'>Enterprise Accounts</h1>
@@ -104,7 +161,7 @@
 
   window.sr = ScrollReveal({ reset: true });
 
-  sr.reveal('.fa-home',
+  sr.reveal('.fa-homee',
     {
       duration: 2200,
       origin: 'top',

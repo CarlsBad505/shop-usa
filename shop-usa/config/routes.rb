@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   root to: 'home#index'
 
   get '/myorders', to: 'orders#user_index', as: 'myorders'
+  get '/custom-inquiry', to: 'orders#custom_inquiry'
   post '/pay/:id', to: 'orders#pay'
   post '/pay', to: 'order_items#pay'
 
