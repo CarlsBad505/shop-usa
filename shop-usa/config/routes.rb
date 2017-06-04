@@ -14,8 +14,8 @@ Rails.application.routes.draw do
   post '/pay/:id', to: 'orders#pay'
   post '/pay', to: 'order_items#pay'
 
-  get '/how-it-works', to: 'home#how_it_works'
-  get '/enterprise', to: 'home#enterprise'
-  get '/guest', to: 'home#guest'
+  # get '/how-it-works', to: 'home#how_it_works'
+  # get '/enterprise', to: 'home#enterprise'
+  # get '/guest', to: 'home#guest'
 
 end
